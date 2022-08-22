@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+        spring如何管理事务:第二种注解式事务
+            根据需求在service方法上或者类上,添加@Transactional,spring自动做事务
+            配置在方法上: 控制一个方法做事务
+            配置在类上: 控制该类下所有方法都做事务
+    -->
+    <!--1.加载jdbc配置文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--
+        2.配置连接池(数据源)
+          如果环境是SSM,早期会使用c3p0或者dbcp,后期被阿里德鲁伊连接池取代
+    -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--选做属性: 控制连接池情况-->
+        <!--初始连接大小-->
+        <property name="initialSize" value="5"/>
+        <!--最小连接数量-->
+        <property name="minIdle" value="5"/>
+        <!--最大连接数量-->
+        <property name="maxActive" value="20"/>
+        <!--最大等待时间: 单位毫秒-->
+        <property name="maxWait" value="60000"/>
+        <!--最大空闲时间-->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <!--验证连接是否可用,开启验证-->
+        <property name="testWhileIdle" value="true"/>
+        <!--验证sql语句-->
+        <property name="validationQuery" value="select 1 from dual"/>
+    </bean>
+
+    <!--3.配置事务管理类==专门做事务的类-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--4.开启事务注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--开启aop注解-->
+    <aop:aspectj-autoproxy/>
+
+    <!--扫描业务层(如果添加其他层功能扫描的包通过','再添加)-->
+    <context:component-scan base-package="com.lanyuan.service"/>
+
+    <!--整合mybatis(注入数据源，关联mybatis.xml核心配置文件,关联映射文件)-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--关联mybatis.xml核心配置文件-->
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <!--关联映射文件:整合之后,只能识别和Mapper接口同目录下的映射文件-->
+<!--        <property name="mapperLocations" value="classpath:com/lanyuan/mapper/*.xml"/>-->
+    </bean>
+    <!--整合mybatis的Mapper接口(spring就会动态创建Mapper接口实现类,相当于容器中已经创建好了Mapper对象)-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定好Mapper接口包-->
+        <property name="basePackage" value="com.sc.mapper"/>
+        <!--注入sqlSessionFactory-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+</beans>
