@@ -36,7 +36,10 @@
               <a href="javascript:void(0)" _href="${base}/role/toList"><i class="mdi mdi-palette"></i> 角色管理</a>
             </li>
             <li class="nav-item nav-item-has-subnav">
-              <a href="javascript:void(0)" _href="${base}/admin/logout"><i class="mdi mdi-palette"></i> 退出登录</a>
+              <a href="javascript:void(0)" _href="${base}/role/toList"><i class="mdi mdi-palette"></i> 用户-角色管理</a>
+            </li>
+            <li class="nav-item nav-item-has-subnav">
+              <a href="${base}/admin/logout" target="_top"><i class="mdi mdi-palette"></i> 退出登录</a>
             </li>
           </ul>
         </nav>

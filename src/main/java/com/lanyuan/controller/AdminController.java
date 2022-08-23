@@ -52,4 +52,10 @@ public class AdminController {
         return "/admin/list";
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/toLogin";
+    }
+
 }
