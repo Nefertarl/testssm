@@ -2,6 +2,8 @@ package com.lanyuan.mapper;
 
 import com.lanyuan.pojo.Admin;
 
+import java.util.List;
+
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,11 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+
+    Admin login(Admin a);
+
+    List<Admin> show();
+
+    //根据用户名,查询用户信息
+    //Admin selectByUsernames(String username);
 }

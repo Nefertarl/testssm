@@ -22,6 +22,12 @@
     from admin
     where ID = #{id,jdbcType=INTEGER}
   </select>
+    <select id="login" resultType="com.lanyuan.pojo.Admin">
+
+    </select>
+  <select id="show" resultType="com.lanyuan.pojo.Admin">
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from admin
     where ID = #{id,jdbcType=INTEGER}

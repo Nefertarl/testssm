@@ -67,7 +67,7 @@
     <!--整合mybatis的Mapper接口(spring就会动态创建Mapper接口实现类,相当于容器中已经创建好了Mapper对象)-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--指定好Mapper接口包-->
-        <property name="basePackage" value="com.sc.mapper"/>
+        <property name="basePackage" value="com.lanyuan.mapper"/>
         <!--注入sqlSessionFactory-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>

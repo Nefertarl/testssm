@@ -11,4 +11,14 @@ public class JspController {
         return "/login";
     }
 
+    @RequestMapping("/toHome")
+    public String toHome(){
+        return "/home";
+    }
+
+    @RequestMapping("/toIndex")
+    public String toIndex(){
+        return "/index";
+    }
+
 }

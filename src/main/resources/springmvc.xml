@@ -27,10 +27,10 @@
         针对静态资源放入WEB一INF:
           /css/xx.css ===>去映射 /WEB-INF/admin/css/
     -->
-    <!--<mvc:resources mapping="/css/**" location="/WEB-INF/admin/css/"/>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/admin/css/"/>
     <mvc:resources mapping="/js/**" location="/WEB-INF/admin/js/"/>
     <mvc:resources mapping="/fonts/**" location="/WEB-INF/admin/fonts/"/>
-    <mvc:resources mapping="/images/**" location="/WEB-INF/admin/images/"/>-->
+    <mvc:resources mapping="/images/**" location="/WEB-INF/admin/images/"/>
 
     <!--上传组件-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
