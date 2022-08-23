@@ -22,8 +22,11 @@
     from admin
     where ID = #{id,jdbcType=INTEGER}
   </select>
-    <select id="login" resultType="com.lanyuan.pojo.Admin">
-
+    <select id="login" resultMap="BaseResultMap" >
+      select
+      <include refid="Base_Column_List"/>
+      from admin
+      where ACCOUNT=#{account} and password=#{password}
     </select>
   <select id="show" resultType="com.lanyuan.pojo.Admin">
 

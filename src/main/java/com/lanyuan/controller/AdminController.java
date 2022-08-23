@@ -32,10 +32,6 @@ public class AdminController {
     public String logins(Map m, Admin a, HttpSession session, String code){
         String ran =(String) session.getAttribute("randomCode");
         if(ran.equalsIgnoreCase(code)){
-            // 把从前台传入过来的密码进行md5加密,和数据库密码匹配
-            // 注册功能输入的密码,也需要先加密后存储数据库
-            //a.setPassword(MD5.MD5Code(a.getPassword()));
-            //admin-->role--->List<Menu>
             Admin admin = as.login(a);
             if(admin!=null){
                 session.setAttribute("admin",admin);

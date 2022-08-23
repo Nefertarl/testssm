@@ -63,7 +63,7 @@
       <div class="login-header text-center">
         <a href="javascript:void(0)"> </a>
       </div>
-      <form action="${base}/admin/login" method="post">
+      <form action="${base}/admin/logins" method="post">
         <div class="form-group has-feedback feedback-left">
           <input type="text" placeholder="请输入您的用户名" class="form-control" name="account" id="username" />
           <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>
