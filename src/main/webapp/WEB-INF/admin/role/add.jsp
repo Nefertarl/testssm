@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=utf-8" isELIgnored="false" language="java" %>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -14,7 +16,7 @@
 <link rel="stylesheet" href="../js/jquery-tags-input/jquery.tagsinput.min.css">
 <link href="../css/style.min.css" rel="stylesheet">
 </head>
-  
+
 <body>
 <div class="container-fluid">
 
@@ -23,27 +25,15 @@
       <div class="card">
         <div class="card-body">
 
-          <form action="#!" method="post" class="row">
+          <form action="${base}/role/doAdd" method="post" enctype="multipart/form-data" class="row">
             <div class="form-group col-md-12">
-              <label for="name">角色名</label>
-              <input type="text" class="form-control" id="name" name="name" value="" placeholder="角色名" />
-            </div>
-            <div class="form-group col-md-12">
-              <label for="description">描述</label>
-              <textarea class="form-control" id="description" name="description" rows="5" value="" placeholder="描述"></textarea>
-            </div>
-
-            <div class="form-group col-md-12">
-              <label for="status">状态</label>
-              <div class="clearfix">
-                <label class="lyear-radio radio-inline radio-primary">
-                  <input type="radio" name="status" value="0"><span>禁用</span>
-                </label>
-                <label class="lyear-radio radio-inline radio-primary">
-                  <input type="radio" name="status" value="1" checked><span>启用</span>
-                </label>
+              <label for="name">角色名称</label>
+              <div class="form-controls">
+                <input type="text" class="form-control" id="name" name="account" value="" placeholder="请输入用户名" />
               </div>
             </div>
+
+
             <div class="form-group col-md-12">
               <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>
               <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);return false;">返 回</button>
@@ -64,5 +54,8 @@
 <!--标签插件-->
 <script src="../js/jquery-tags-input/jquery.tagsinput.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
+<script>
+
+</script>
 </body>
 </html>

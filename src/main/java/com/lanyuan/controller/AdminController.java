@@ -4,11 +4,13 @@ import com.github.pagehelper.PageInfo;
 import com.lanyuan.pojo.Admin;
 import com.lanyuan.service.AdminService;
 import com.lanyuan.util.CodeUtil;
+import com.lanyuan.util.UploadAndLoadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,11 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
-@CrossOrigin
 public class AdminController {
 
     @Autowired
@@ -70,10 +72,36 @@ public class AdminController {
         }
         PageInfo<Admin> p = as.show(pageNum,pageSize,a);
         m.put("p",p);
-        //调用角色业务层,查询所有角色信息存储起来
-        //List<Role> listRole=rs.queryAll();
-        //session.setAttribute("listRole",listRole);
         return "/admin/list";
+    }
+
+    @RequestMapping("/toAdd")
+    public String toAdd(HttpSession session){
+        return "/admin/add";
+    }
+
+    //注册验证-是否存在该账号
+    @RequestMapping(value = "/checkAccount",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String checkAccount(String account){
+        Admin u = as.findByAcunt(account);
+        if (u==null){
+            return "账号可用";
+        }else {
+            return "账号不可用";
+        }
+    }
+
+    //注册操作
+    @RequestMapping("/doAdd")
+    public String doAdd(Admin u, MultipartFile myHead, HttpServletRequest req){
+        u.setCreatetime(new Date());
+        if (myHead.getOriginalFilename().length()>0){
+            u.setHeadPic(UploadAndLoadUtil.upload(req,myHead));
+        }
+        as.addUser(u);
+        return "redirect:/admin/show";
+
     }
 
 }

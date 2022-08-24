@@ -31,7 +31,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int add(Admin a) {
+    public Admin findByAcunt(String account) {
+        return mapper.findByAcunt(account);
+    }
+
+    @Override
+    public int addUser(Admin a) {
         return mapper.insertSelective(a);
     }
 

@@ -9,7 +9,9 @@ public interface AdminService {
 
     PageInfo<Admin> show(Integer pageNum, Integer pageSize,Admin a);
 
-    int add(Admin a);
+    Admin findByAcunt(String account);
+
+    int addUser(Admin a);
 
     int delete(Integer id);
 

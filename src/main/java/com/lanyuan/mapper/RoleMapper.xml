@@ -14,7 +14,18 @@
     from role
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="show" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from role
+      <where>
+        <if test="rolename!=null">
+          <bind name="newRolename" value="'%'+rolename+'%'"/>
+          and rolename like #{newRolename}
+        </if>
+      </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from role
     where ID = #{id,jdbcType=INTEGER}
   </delete>

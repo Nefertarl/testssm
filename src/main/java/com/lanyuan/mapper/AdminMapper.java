@@ -21,6 +21,6 @@ public interface AdminMapper {
 
     List<Admin> show(Admin a);
 
-    //根据用户名,查询用户信息
-    //Admin selectByUsernames(String username);
+    Admin findByAcunt(String account);
+
 }

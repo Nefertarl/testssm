@@ -22,7 +22,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-toolbar clearfix">
-          <form class="pull-right search-bar" method="get" action="#!" role="form">
+          <form class="pull-right search-bar" method="get" action="${base}/role/show" role="form" id="mySearchForm">
             <div class="input-group">
               <div class="input-group-btn">
                 <input type="hidden" name="search_field" id="search-field" value="title">
@@ -30,15 +30,14 @@
                   search <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name">search</a> </li>
-                  <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name">角色名称</a> </li>
+                  <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name" onclick="changeSearch('rolename')" >角色名称</a> </li>
                 </ul>
               </div>
-              <input type="text" class="form-control" value="" name="keyword" placeholder="请输入名称">
+              <input type="text" class="form-control" value="" id="search" onblur="doSearch()" name="rolename" placeholder="请输入名称">
             </div>
           </form>
           <div class="toolbar-btn-action">
-            <a class="btn btn-primary m-r-5" href="${base}/admin/toAdd"><i class="mdi mdi-plus"></i> 新增</a>
+            <a class="btn btn-primary m-r-5" href="${base}/role/toAdd"><i class="mdi mdi-plus"></i> 新增</a>
             <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 全部删除</a>
           </div>
         </div>
@@ -68,22 +67,11 @@
                     </label>
                   </td>
                   <td>${a.id}</td>
-                  <td>${a.account}</td>
-                  <td>${a.name}</td>
-                  <td><img class="img-avatar" src="${base}/upload/${a.headPic}" alt="图片丢了"></td>
-                  <td>${a.phone}</td>
-                  <td>${a.email}</td>
-                  <td>${a.sex eq 0? "女":"男"}</td>
-                  <td>${a.r.rolename}</td>
-                  <td>
-                    <c:if test="${a.status eq 1}"><font class="text-success">正常</font></c:if>
-                    <c:if test="${a.status eq 2}"><font class="text-danger">注销</font></c:if>
-                    <c:if test="${a.status eq 0}"><font class="text-warning">未验证</font></c:if>
-                  </td>
+                  <td>${a.rolename}</td>
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-xs btn-default" href="${base}/admin/toUpdate?id=${a.id}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                      <a class="btn btn-xs btn-default" href="${base}/admin/delete?id=${a.id}&headPic=${a.headPic}" onclick="return confirm('是否删除')" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                      <a class="btn btn-xs btn-default" href="${base}/admin/delete?id=${a.id}" onclick="return confirm('是否删除')" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                     </div>
                   </td>
                 </tr>
@@ -93,11 +81,11 @@
             </table>
           </div>
           <ul class="pagination">
-            <li><span><a href="${base}/admin/show?pageNum=${p.prePage}">«</a></span></li>
+            <li><span><a href="${base}/role/show?pageNum=${p.prePage}">«</a></span></li>
             <c:forEach var="i" items="${p.navigatepageNums}">
-              <li <c:if test="${i eq p.pageNum}"> class="active" </c:if> ><a href="${base}/admin/show?pageNum=${i}">${i}</a></li>
+              <li <c:if test="${i eq p.pageNum}"> class="active" </c:if> ><a href="${base}/role/show?pageNum=${i}">${i}</a></li>
             </c:forEach>
-            <li><span><a href="${base}/admin/show?pageNum=${p.nextPage}">»</a></span></li>
+            <li><span><a href="${base}/role/show?pageNum=${p.nextPage}">»</a></span></li>
           </ul>
 
         </div>
@@ -113,6 +101,16 @@
 <script type="text/javascript" src="../js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
 <script type="text/javascript">
+  function changeSearch(obj){
+    document.getElementById("search").setAttribute("name",obj);
+  }
+
+  //
+  function doSearch(){
+    var mySearchForm = document.getElementById("mySearchForm");
+    mySearchForm.submit();
+  }
+
   $(function(){
     $('.search-bar .dropdown-menu a').click(function() {
       var field = $(this).data('field') || '';

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html; charset=utf-8" isELIgnored="false" language="java" %>
 <!DOCTYPE html>
 <html lang="zh">
@@ -87,7 +88,7 @@
                     <c:if test="${a.status eq 1}"><font class="text-danger">正常</font></c:if>
                     <c:if test="${a.status eq 2}"><font class="text-warning">注销</font></c:if>
                   </td>
-                  <td>${a.createtime}</td>
+                  <td><fmt:formatDate value="${a.createtime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
                   <td>${a.sex eq 0? "女":"男"}</td>
                   <td><img class="img-avatar" src="${base}/upload/${a.headPic}" alt="图片丢了"></td>
                   <td>
