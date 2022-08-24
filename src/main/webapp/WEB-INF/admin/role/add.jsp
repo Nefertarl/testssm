@@ -54,6 +54,12 @@
 <!--标签插件-->
 <script src="../js/jquery-tags-input/jquery.tagsinput.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
+
+<!--消息提示-->
+<script src="${base}/js/bootstrap-notify.min.js"></script>
+<script src="${base}/js/lightyear.js"></script>
+<script src="${base}/js/main.min.js"></script>
+<link href="${base}/css/animate.css" rel="stylesheet">
 <script>
   var flag = true;
   //验证表单-----------------------
