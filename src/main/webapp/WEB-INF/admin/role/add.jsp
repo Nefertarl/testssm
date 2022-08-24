@@ -25,11 +25,11 @@
       <div class="card">
         <div class="card-body">
 
-          <form action="${base}/role/doAdd" method="post" enctype="multipart/form-data" class="row">
+          <form action="${base}/role/doAdd" onsubmit="return checkForm()" method="post" enctype="multipart/form-data" class="row">
             <div class="form-group col-md-12">
               <label for="name">角色名称</label>
               <div class="form-controls">
-                <input type="text" class="form-control" id="name" name="account" value="" placeholder="请输入用户名" />
+                <input type="text" class="form-control" id="rolename" name="rolename" value="" placeholder="请输入角色名称" />
               </div>
             </div>
 
@@ -55,7 +55,23 @@
 <script src="../js/jquery-tags-input/jquery.tagsinput.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
 <script>
+  var flag = true;
+  //验证表单-----------------------
+  function checkForm(){
+    //验证账号
+    var rolename = document.getElementById("rolename").value;
+    if (rolename=="" || rolename==null) {
+      lightyear.loading('show');
+      // 假设ajax提交操作
+      setTimeout(function() {
+        lightyear.loading('hide');
+        lightyear.notify('角色名称不能为空', 'danger', 100);
+      }, 1e3)
+      return false;
+    }
 
+    return true;
+  }
 </script>
 </body>
 </html>
