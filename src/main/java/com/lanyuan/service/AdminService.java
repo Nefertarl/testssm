@@ -7,7 +7,7 @@ public interface AdminService {
 
     Admin login(Admin a);
 
-    PageInfo<Admin> show(Integer pageNum, Integer pageSize);
+    PageInfo<Admin> show(Integer pageNum, Integer pageSize,Admin a);
 
     int add(Admin a);
 

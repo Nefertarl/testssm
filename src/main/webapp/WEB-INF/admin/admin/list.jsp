@@ -22,7 +22,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-toolbar clearfix">
-          <form class="pull-right search-bar" method="get" action="#!" role="form">
+          <form class="pull-right search-bar" method="get" action="${base}/admin/show" id="mySearchForm" role="form">
             <div class="input-group">
               <div class="input-group-btn">
                 <input type="hidden" name="search_field" id="search-field" value="title">
@@ -30,11 +30,12 @@
                   search <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name">search</a> </li>
-                  <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name">姓名</a> </li>
+                  <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name" onclick="changeSearch('account')">账号</a> </li>
+                  <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name" onclick="changeSearch('name')">姓名</a> </li>
+                  <li> <a tabindex="-1" href="javascript:void(0)" data-field="cat_name" onclick="changeSearch('sex')">性别</a> </li>
                 </ul>
               </div>
-              <input type="text" class="form-control" value="" name="keyword" placeholder="请输入名称">
+              <input type="text" class="form-control" id="search" onblur="doSearch()" value="" name="account" placeholder="请输入名称">
             </div>
           </form>
           <div class="toolbar-btn-action">
@@ -77,17 +78,18 @@
                   </td>
                   <td>${a.id}</td>
                   <td>${a.account}</td>
+                  <td>${a.password}</td>
                   <td>${a.name}</td>
-                  <td><img class="img-avatar" src="${base}/upload/${a.headPic}" alt="图片丢了"></td>
                   <td>${a.phone}</td>
                   <td>${a.email}</td>
-                  <td>${a.sex eq 0? "女":"男"}</td>
-                  <td>${a.r.rolename}</td>
                   <td>
-                    <c:if test="${a.status eq 1}"><font class="text-success">正常</font></c:if>
-                    <c:if test="${a.status eq 2}"><font class="text-danger">注销</font></c:if>
-                    <c:if test="${a.status eq 0}"><font class="text-warning">未验证</font></c:if>
+                    <c:if test="${a.status eq 0}"><font class="text-success">未验证</font></c:if>
+                    <c:if test="${a.status eq 1}"><font class="text-danger">正常</font></c:if>
+                    <c:if test="${a.status eq 2}"><font class="text-warning">注销</font></c:if>
                   </td>
+                  <td>${a.createtime}</td>
+                  <td>${a.sex eq 0? "女":"男"}</td>
+                  <td><img class="img-avatar" src="${base}/upload/${a.headPic}" alt="图片丢了"></td>
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-xs btn-default" href="${base}/admin/toUpdate?id=${a.id}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
@@ -120,7 +122,36 @@
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/perfect-scrollbar.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
+
+<!--消息提示-->
+<script src="${base}/js/bootstrap-notify.min.js"></script>
+<script src="${base}/js/lightyear.js"></script>
+<script src="${base}/js/main.min.js"></script>
+<link href="${base}/css/animate.css" rel="stylesheet">
 <script type="text/javascript">
+//搜索选中的属性名称
+function changeSearch(obj){
+  document.getElementById("search").setAttribute("name",obj);
+}
+
+//
+function doSearch(){
+  var mySearchForm = document.getElementById("mySearchForm");
+  var search = document.getElementById("search");
+  if (search.name=="sex") {
+    if (search.value!="男" && search.value!="女"){
+      lightyear.loading('show');
+      // 假设ajax提交操作
+      setTimeout(function() {
+        lightyear.loading('hide');
+        lightyear.notify('输入的性别不对,只能是男或女!', 'danger', 100);
+      }, 1e3)
+      return false;
+    }
+  }
+  mySearchForm.submit();
+}
+
 $(function(){
     $('.search-bar .dropdown-menu a').click(function() {
         var field = $(this).data('field') || '';
@@ -128,6 +159,8 @@ $(function(){
         $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
     });
 });
+
+
 </script>
 </body>
 </html>

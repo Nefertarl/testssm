@@ -102,6 +102,7 @@
     <script src="${base}/js/bootstrap-notify.min.js"></script>
     <script src="${base}/js/lightyear.js"></script>
     <script src="${base}/js/main.min.js"></script>
+
   <script type="text/javascript">
       if(${!empty error}){
           lightyear.loading('show');

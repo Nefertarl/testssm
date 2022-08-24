@@ -30,7 +30,7 @@
         <nav class="sidebar-main">
           <ul class="nav nav-drawer">
             <li class="nav-item nav-item-has-subnav">
-              <a href="javascript:void(0)" _href="${base}/admin/toList"><i class="mdi mdi-palette"></i> 用户管理</a>
+              <a href="javascript:void(0)" _href="${base}/admin/show"><i class="mdi mdi-palette"></i> 用户管理</a>
             </li>
             <li class="nav-item nav-item-has-subnav">
               <a href="javascript:void(0)" _href="${base}/role/toList"><i class="mdi mdi-palette"></i> 角色管理</a>

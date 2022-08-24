@@ -24,9 +24,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public PageInfo<Admin> show(Integer pageNum, Integer pageSize) {
+    public PageInfo<Admin> show(Integer pageNum, Integer pageSize,Admin a) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Admin> list = mapper.show();
+        List<Admin> list = mapper.show(a);
         return new PageInfo<>(list);
     }
 

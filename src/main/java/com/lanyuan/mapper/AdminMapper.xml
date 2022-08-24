@@ -28,8 +28,23 @@
       from admin
       where ACCOUNT=#{account} and password=#{password}
     </select>
-  <select id="show" resultType="com.lanyuan.pojo.Admin">
-
+  <select id="show" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from admin
+    <where>
+      <if test="account!=null">
+        <bind name="newAccount" value="'%'+account+'%'"/>
+        and account like #{newAccount}
+      </if>
+      <if test="name!=null">
+        <bind name="newName" value="'%'+name+'%'"/>
+        and name like #{newName}
+      </if>
+      <if test="sex!=null">
+        and sex = #{sex}
+      </if>
+    </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from admin

@@ -1,5 +1,6 @@
 package com.lanyuan.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.lanyuan.pojo.Admin;
 import com.lanyuan.service.AdminService;
 import com.lanyuan.util.CodeUtil;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -49,15 +51,29 @@ public class AdminController {
         return "/login";
     }
 
-    @RequestMapping("/toList")
-    public String toList(){
-        return "/admin/list";
-    }
 
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();
         return "redirect:/toLogin";
+    }
+
+    @RequestMapping("/show")
+    public String show(@RequestParam(defaultValue = "1")Integer pageNum,@RequestParam(defaultValue = "2")Integer pageSize, Map m, HttpSession session,Admin a){
+        if(a.getSex()!=null){
+            a.setSex(a.getSex().equals("男")?"1":"0");
+        }
+        if(a.getAccount()!=null || a.getName()!=null || a.getSex()!=null){
+            session.setAttribute("search",a);
+        }else{
+            a = (Admin) session.getAttribute("search");
+        }
+        PageInfo<Admin> p = as.show(pageNum,pageSize,a);
+        m.put("p",p);
+        //调用角色业务层,查询所有角色信息存储起来
+        //List<Role> listRole=rs.queryAll();
+        //session.setAttribute("listRole",listRole);
+        return "/admin/list";
     }
 
 }
