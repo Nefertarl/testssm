@@ -20,6 +20,14 @@ public class Admin implements Serializable {
 
     private Date createtime;
 
+    public Admin(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
+    public Admin() {
+    }
+
     private String sex;
 
     private String headPic;

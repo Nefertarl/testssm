@@ -1,6 +1,7 @@
 package com.lanyuan.util;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -80,6 +81,8 @@ public class CodeUtil {
             }
             //将验证码保存session
             session.setAttribute("randomCode", sRand);
+            ServletContext application = session.getServletContext();
+            application.setAttribute("randomCode2", sRand);
             g.dispose();
             ServletOutputStream responseOutputStream = response.getOutputStream();
             ImageIO.write(image, "JPEG", responseOutputStream);
