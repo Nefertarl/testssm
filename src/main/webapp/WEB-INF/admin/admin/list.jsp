@@ -95,7 +95,7 @@
                   <td><img class="img-avatar" src="${base}/upload/${a.headPic}" alt="图片丢了"></td>
                   <td>
                     <div class="btn-group">
-                      <a class="btn btn-xs btn-default" href="${base}/admin/toUpdate?id=${a.id}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                      <a class="btn btn-xs btn-default" href="${base}/admin/toUpdateAdmin?id=${a.id}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
                       <a class="btn btn-xs btn-default" href="${base}/admin/doDelAdmin?id=${a.id}&myHead=${a.headPic}" onclick="return confirm('是否删除')" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                     </div>
                   </td>

@@ -72,7 +72,6 @@
                   <td>${a.rolename}</td>
                   <td>
                     <div class="btn-group">
-                      <a class="btn btn-xs btn-default" href="${base}/admin/toUpdate?id=${a.id}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
                       <a class="btn btn-xs btn-default" href="${base}/role/doDelRole?id=${a.id}" onclick="return confirm('是否删除')" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                     </div>
                   </td>

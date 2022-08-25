@@ -77,7 +77,7 @@ public class AdminController {
     }
 
     @RequestMapping("/toAdd")
-    public String toAdd(HttpSession session){
+    public String toAdd(){
         return "/admin/add";
     }
 
@@ -126,6 +126,27 @@ public class AdminController {
         }
 
         as.doBathDelUser(ids);
+        return "redirect:/admin/show";
+    }
+
+    @RequestMapping("/toUpdateAdmin")
+    public String toUpdateAdmin(Integer id,Map map){
+        Admin a = as.findById(id);
+        map.put("a",a);
+        return "/admin/edit";
+    }
+
+    @RequestMapping("/doUpdateAdmin")
+    public String doUpdateAdmin(Admin u,MultipartFile myHead,HttpServletRequest req){
+        if (myHead.getOriginalFilename().length()>0){
+            //删除之前的图片
+            Admin uid = as.findById(u.getId());
+            String path = req.getServletContext().getRealPath("/upload")+File.separator+uid.getHeadPic();
+            new File(path).delete();
+            //上传修改后的图片
+            u.setHeadPic(UploadAndLoadUtil.upload(req,myHead));
+        }
+        int n = as.doUpdateAdmin(u);
         return "redirect:/admin/show";
     }
 

@@ -19,8 +19,6 @@ public interface AdminService {
 
     void doBathDelUser(Integer[] ids);
 
-    int update(Admin admin);
-
-
+    int doUpdateAdmin(Admin a);
 
 }

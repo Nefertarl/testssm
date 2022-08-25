@@ -56,9 +56,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int update(Admin admin) {
-        //动态更新
-        return mapper.updateByPrimaryKeySelective(admin);
+    public int doUpdateAdmin(Admin a) {
+        return mapper.updateByPrimaryKeySelective(a);
     }
 
 
