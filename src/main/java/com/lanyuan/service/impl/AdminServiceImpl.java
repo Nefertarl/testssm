@@ -60,5 +60,17 @@ public class AdminServiceImpl implements AdminService {
         return mapper.updateByPrimaryKeySelective(a);
     }
 
+    @Override
+    public void removeUes(Integer uid) {
+        mapper.removeUes(uid);
+    }
+
+    @Override
+    public void addUes(Integer uid, Integer[] rid) {
+        for (Integer r : rid) {
+            mapper.addUes(uid,r);
+        }
+    }
+
 
 }

@@ -18,4 +18,5 @@ public interface RoleService {
     void doBathDelRole(Integer[] ids);
 
     List<Role> selectRoleAll();
+
 }

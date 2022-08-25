@@ -166,4 +166,15 @@ public class AdminController {
         return "/admin/resources";
     }
 
+    @RequestMapping("/doAddRes")
+    public String doAddRes(Integer uid,Integer[] rid){
+
+        //先删除原来的关系表
+        as.removeUes(uid);
+
+        //再添加现有的
+        as.addUes(uid,rid);
+        return "redirect:/admin/show";
+    }
+
 }

@@ -23,14 +23,23 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header"><h4>分配角色</h4></div>
+          <div class="card-header"><h4>用户名称:${as.name}</h4></div>
           <div class="card-body">
 
-            <form action="${base}/role/doAddRes" method="post">
+
+            <form action="${base}/admin/doAddRes" method="post">
+
+
               <div class="form-group">
                 <input type="hidden" name="uid" value="${as.id}">
-                <label for="example-text-input">用户名称</label>
-                <input class="form-control" type="text" value="${as.name}" name="role-input" placeholder="用户名称">
               </div>
+
+              <div class="form-group">
+                <c:forEach var="r" items="${rs}">
+                  <input type="checkbox" name="rid" value="${r.id}"><span>${r.rolename}</span>
+                </c:forEach>
+              </div>
+
               <div class="table-responsive">
                 <div class="form-group col-md-12">
                   <button type="submit" class="btn btn-primary ajax-post" target-form="add-form">确 定</button>

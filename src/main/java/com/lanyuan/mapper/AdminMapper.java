@@ -1,6 +1,7 @@
 package com.lanyuan.mapper;
 
 import com.lanyuan.pojo.Admin;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,5 +29,9 @@ public interface AdminMapper {
     void doBathDelUser(Integer[] ids);
 
     List<Admin> selectAdminByRid(Integer rid);
+
+    void removeUes(Integer uid);
+
+    void addUes(@Param("uid") Integer uid, @Param("r") Integer r);
 
 }

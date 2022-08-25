@@ -201,4 +201,16 @@
       HEAD_PIC = #{headPic,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--在别的xml,针对于关系表-->
+  <delete id="removeUes">
+    delete from relation
+    where uid = #{uid}
+  </delete>
+
+  <insert id="addUes">
+    insert into relation values (#{uid},#{r})
+  </insert>
+
 </mapper>

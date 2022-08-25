@@ -21,4 +21,8 @@ public interface AdminService {
 
     int doUpdateAdmin(Admin a);
 
+    void removeUes(Integer uid);
+
+    void addUes(Integer uid,Integer[] rid);
+
 }
