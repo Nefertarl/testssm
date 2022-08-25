@@ -36,7 +36,7 @@
 
               <div class="form-group">
                 <c:forEach var="r" items="${rs}">
-                  <input type="checkbox" name="rid" value="${r.id}"><span>${r.rolename}</span>
+                  <input type="checkbox" name="rid" value="${r.id}" <c:if test="${r.rolename eq '超级管理员'}">checked</c:if> ><span>${r.rolename}</span>
                 </c:forEach>
               </div>
 
