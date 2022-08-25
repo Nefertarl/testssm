@@ -14,5 +14,4 @@ public interface RoleService {
     int doDelRole(Integer id);
 
     void doBathDelRole(Integer[] ids);
-
 }

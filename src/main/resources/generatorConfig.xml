@@ -76,7 +76,7 @@
                如果保留了之前生成的table标签,
                会把之前的实体类还原，Mapper接口也会还原 映射文件会追加
         -->
-		<table tableName="admin"
+		<table tableName="relation"
 			   enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
 			   enableSelectByExample="false" selectByExampleQueryId="false" >
 			<!--<columnOverride column="ID" javaType="java.lang.Integer"></columnOverride>-->

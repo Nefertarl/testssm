@@ -22,4 +22,5 @@ public interface RoleMapper {
     Role findByRolename(String rolename);
 
     void doBathDelRole(Integer[] ids);
+
 }
