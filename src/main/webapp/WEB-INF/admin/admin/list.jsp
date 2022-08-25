@@ -67,6 +67,7 @@
                 <th>创建时间</th>
                 <th>性别</th>
                 <th>头像</th>
+                <th>所属角色</th>
                 <th>操作</th>
               </tr>
               </thead>
@@ -93,6 +94,13 @@
                   <td><fmt:formatDate value="${a.createtime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
                   <td>${a.sex eq 0? "女":"男"}</td>
                   <td><img class="img-avatar" src="${base}/upload/${a.headPic}" alt="图片丢了"></td>
+                  <td>
+                    <select>
+                      <c:forEach var="r" items="${a.roles}">
+                        <option value="${r.id}">${r.rolename}</option>
+                      </c:forEach>
+                    </select>
+                  </td>
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-xs btn-default" href="${base}/admin/toUpdateAdmin?id=${a.id}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>

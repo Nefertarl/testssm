@@ -2,8 +2,13 @@ package com.lanyuan.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Admin implements Serializable {
+
+    //一对多,一个用户对应多个角色
+    private List<Role> roles;
+
     private Integer id;
 
     private String account;
@@ -33,6 +38,14 @@ public class Admin implements Serializable {
     private String headPic;
 
     private static final long serialVersionUID = 1L;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public Integer getId() {
         return id;

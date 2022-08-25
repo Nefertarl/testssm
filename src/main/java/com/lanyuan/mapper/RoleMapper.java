@@ -23,4 +23,6 @@ public interface RoleMapper {
 
     void doBathDelRole(Integer[] ids);
 
+    List<Role> selectRoleByUid(Integer uid);
+
 }

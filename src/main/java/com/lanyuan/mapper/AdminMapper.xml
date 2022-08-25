@@ -12,6 +12,10 @@
     <result column="CREATETIME" jdbcType="DATE" property="createtime" />
     <result column="SEX" jdbcType="CHAR" property="sex" />
     <result column="HEAD_PIC" jdbcType="VARCHAR" property="headPic" />
+
+    <collection property="roles" column="id" ofType="com.lanyuan.pojo.Role"
+                select="com.lanyuan.mapper.RoleMapper.selectRoleByUid"/>
+
   </resultMap>
   <sql id="Base_Column_List">
     ID, ACCOUNT, PASSWORD, NAME, PHONE, EMAIL, STATUS, CREATETIME, SEX, HEAD_PIC
