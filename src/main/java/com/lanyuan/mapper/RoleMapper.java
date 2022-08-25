@@ -25,4 +25,6 @@ public interface RoleMapper {
 
     List<Role> selectRoleByUid(Integer uid);
 
+    List<Role> selectRoleAll();
+
 }

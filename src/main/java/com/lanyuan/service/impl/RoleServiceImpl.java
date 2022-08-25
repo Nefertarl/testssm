@@ -43,5 +43,10 @@ public class RoleServiceImpl implements RoleService {
         mapper.doBathDelRole(ids);
     }
 
+    @Override
+    public List<Role> selectRoleAll() {
+        return mapper.selectRoleAll();
+    }
+
 
 }

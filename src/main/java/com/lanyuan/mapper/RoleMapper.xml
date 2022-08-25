@@ -41,8 +41,13 @@
       from relation re,role ro
       where re.uid = #{uid} and re.rid = ro.id
     </select>
+  <select id="selectRoleAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from role
+  </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from role
     where ID = #{id,jdbcType=INTEGER}
   </delete>

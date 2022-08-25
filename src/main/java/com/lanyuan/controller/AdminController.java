@@ -2,7 +2,9 @@ package com.lanyuan.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.lanyuan.pojo.Admin;
+import com.lanyuan.pojo.Role;
 import com.lanyuan.service.AdminService;
+import com.lanyuan.service.RoleService;
 import com.lanyuan.util.CodeUtil;
 import com.lanyuan.util.UploadAndLoadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -28,6 +31,9 @@ public class AdminController {
 
     @Autowired
     AdminService as;
+
+    @Autowired
+    RoleService rs;
 
     @RequestMapping("/getCode")
     public void getCode(HttpSession session, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -148,6 +154,16 @@ public class AdminController {
         }
         int n = as.doUpdateAdmin(u);
         return "redirect:/admin/show";
+    }
+
+    @RequestMapping("/toResRole")
+    public String toResRole(Integer id,Map map){
+        Admin r = as.findById(id);
+        //查询所有角色
+        List<Role> rt = rs.selectRoleAll();
+        map.put("as",r);
+        map.put("rs",rt);
+        return "/admin/resources";
     }
 
 }
