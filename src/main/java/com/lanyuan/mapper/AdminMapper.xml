@@ -62,7 +62,13 @@
       from admin
       where id = #{id}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectAdminByRid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from relation re,admin ad
+    where re.rid = #{rid} and re.uid = ad.id
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from admin
     where ID = #{id,jdbcType=INTEGER}
   </delete>

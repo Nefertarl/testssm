@@ -27,4 +27,6 @@ public interface AdminMapper {
 
     void doBathDelUser(Integer[] ids);
 
+    List<Admin> selectAdminByRid(Integer rid);
+
 }

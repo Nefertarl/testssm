@@ -56,6 +56,7 @@
                 </th>
                 <th>编号</th>
                 <th>角色名称</th>
+                <th>所属用户</th>
                 <th>操作</th>
               </tr>
               </thead>
@@ -70,6 +71,13 @@
                   </td>
                   <td>${a.id}</td>
                   <td>${a.rolename}</td>
+                  <td>
+                    <select>
+                      <c:forEach var="r" items="${a.adminList}">
+                        <option value="${r.id}">${r.name}</option>
+                      </c:forEach>
+                    </select>
+                  </td>
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-xs btn-default" href="${base}/role/doDelRole?id=${a.id}" onclick="return confirm('是否删除')" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>

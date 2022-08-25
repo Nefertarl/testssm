@@ -4,6 +4,10 @@
   <resultMap id="BaseResultMap" type="com.lanyuan.pojo.Role">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="ROLENAME" jdbcType="VARCHAR" property="rolename" />
+
+    <collection property="adminList" column="id" ofType="com.lanyuan.pojo.Admin"
+                select="com.lanyuan.mapper.AdminMapper.selectAdminByRid"></collection>
+
   </resultMap>
   <sql id="Base_Column_List">
     ID, ROLENAME
