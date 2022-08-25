@@ -2,6 +2,7 @@ package com.lanyuan.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.lanyuan.pojo.Role;
+import com.lanyuan.service.AdminService;
 import com.lanyuan.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,12 +60,22 @@ public class RoleController {
 
     @RequestMapping("/doDelRole")
     public String doDelRole(Integer id){
+
+        //先删除原来的关系表
+        rs.removeRes(id);
+
         int n = rs.doDelRole(id);
         return "redirect:/role/show";
     }
 
     @RequestMapping("/doBathDelRole")
     public String doBathDelRole(Integer[] ids){
+
+        for (Integer id: ids){
+            //先删除原来的关系表
+            rs.removeRes(id);
+        }
+
         rs.doBathDelRole(ids);
         return "redirect:/role/show";
     }

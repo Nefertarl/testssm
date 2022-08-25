@@ -19,4 +19,6 @@ public interface RoleService {
 
     List<Role> selectRoleAll();
 
+    void removeRes(Integer rid);
+
 }

@@ -27,4 +27,5 @@ public interface RoleMapper {
 
     List<Role> selectRoleAll();
 
+    void removeRes(Integer rid);
 }

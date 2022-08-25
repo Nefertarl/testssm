@@ -48,5 +48,10 @@ public class RoleServiceImpl implements RoleService {
         return mapper.selectRoleAll();
     }
 
+    @Override
+    public void removeRes(Integer rid) {
+        mapper.removeRes(rid);
+    }
+
 
 }

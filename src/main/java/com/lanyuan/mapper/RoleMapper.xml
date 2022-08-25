@@ -94,4 +94,10 @@
     set ROLENAME = #{rolename,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <delete id="removeRes">
+    delete from relation
+    where rid = #{rid}
+  </delete>
+
 </mapper>

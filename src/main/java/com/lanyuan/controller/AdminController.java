@@ -119,6 +119,10 @@ public class AdminController {
         String src = req.getServletContext().getRealPath("/upload")+ File.separator+myHead;
         File f = new File(src);
         f.delete();
+
+        //先删除原来的关系表
+        as.removeUes(id);
+
         int n = as.doDelUser(id);
         return "redirect:/admin/show";
     }
@@ -129,6 +133,11 @@ public class AdminController {
             Admin u = as.findById(id);
             String src = req.getServletContext().getRealPath("/upload")+File.separator+u.getHeadPic();
             new File(src).delete();
+        }
+
+        for (Integer id: ids){
+            //先删除原来的关系表
+            as.removeUes(id);
         }
 
         as.doBathDelUser(ids);
