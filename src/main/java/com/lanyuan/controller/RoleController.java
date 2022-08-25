@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -35,6 +36,37 @@ public class RoleController {
     @RequestMapping("/toAdd")
     public String toAdd(HttpSession session){
         return "/role/add";
+    }
+
+    //验证
+    @RequestMapping(value = "/checkRolename",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String checkRolename(String rolename){
+        Role u = rs.findByRolename(rolename);
+        if (u==null){
+            return "角色没重复";
+        }else {
+            return "角色不可用";
+        }
+    }
+
+    @RequestMapping("/doAdd")
+    public String doAdd(Role u){
+        rs.addRole(u);
+        return "redirect:/role/show";
+
+    }
+
+    @RequestMapping("/doDelRole")
+    public String doDelRole(Integer id){
+        int n = rs.doDelRole(id);
+        return "redirect:/role/show";
+    }
+
+    @RequestMapping("/doBathDelRole")
+    public String doBathDelRole(Integer[] ids){
+        rs.doBathDelRole(ids);
+        return "redirect:/role/show";
     }
 
 }

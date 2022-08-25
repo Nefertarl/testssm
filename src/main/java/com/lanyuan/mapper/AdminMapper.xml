@@ -52,9 +52,21 @@
     from admin
     where account = #{account}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="findById" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"></include>
+      from admin
+      where id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from admin
     where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="doBathDelUser">
+    delete from admin where id in
+    <foreach collection="array" open="(" close=")" separator="," item="id">
+      #{id}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.lanyuan.pojo.Admin">
     insert into admin (ID, ACCOUNT, PASSWORD, 

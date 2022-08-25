@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
@@ -102,6 +103,30 @@ public class AdminController {
         as.addUser(u);
         return "redirect:/admin/show";
 
+    }
+
+    //删除用户功能
+    @RequestMapping("/doDelAdmin")
+    public String doDelAdmin(Integer id,String myHead,HttpServletRequest req){
+        System.out.println("===========>"+myHead);
+        //删除图片
+        String src = req.getServletContext().getRealPath("/upload")+ File.separator+myHead;
+        File f = new File(src);
+        f.delete();
+        int n = as.doDelUser(id);
+        return "redirect:/admin/show";
+    }
+    //批量删除
+    @RequestMapping("/doBathDelAdmin")
+    public String doBathDelAdmin(Integer[] ids,HttpServletRequest req){
+        for (Integer id : ids) {
+            Admin u = as.findById(id);
+            String src = req.getServletContext().getRealPath("/upload")+File.separator+u.getHeadPic();
+            new File(src).delete();
+        }
+
+        as.doBathDelUser(ids);
+        return "redirect:/admin/show";
     }
 
 }

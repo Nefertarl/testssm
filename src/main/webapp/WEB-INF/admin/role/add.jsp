@@ -29,7 +29,7 @@
             <div class="form-group col-md-12">
               <label for="name">角色名称</label>
               <div class="form-controls">
-                <input type="text" class="form-control" id="rolename" name="rolename" value="" placeholder="请输入角色名称" />
+                <input type="text" class="form-control" id="rolename" name="rolename" value="" placeholder="请输入角色名称" onblur="checkAccount()"/>
               </div>
             </div>
 
@@ -75,9 +75,43 @@
       }, 1e3)
       return false;
     }
+    if(!flag){
+      lightyear.loading('show');
+      // 假设ajax提交操作
+      setTimeout(function() {
+        lightyear.loading('hide');
+        lightyear.notify('角色已存在!', 'danger', 100);
+      }, 1e3)
+      return false;
+    }
 
     return true;
   }
+
+  //验证角色名称是否可用
+  function checkAccount(){
+    var rolename = document.getElementById("rolename").value;
+    $.post('${base}/role/checkRolename?rolename='+rolename,function (result) {
+      if (result=="角色没重复"){
+        lightyear.loading('show');
+        // 假设ajax提交操作
+        setTimeout(function() {
+          lightyear.loading('hide');
+          lightyear.notify('角色没重复', 'success', 100);
+        }, 1e3)
+        flag = true;
+      }else {
+        lightyear.loading('show');
+        // 假设ajax提交操作
+        setTimeout(function() {
+          lightyear.loading('hide');
+          lightyear.notify('角色不可用!', 'danger', 100);
+        }, 1e3)
+        flag = false;
+      }
+    });
+  }
+
 </script>
 </body>
 </html>

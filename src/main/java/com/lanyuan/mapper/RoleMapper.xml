@@ -25,11 +25,23 @@
         </if>
       </where>
     </select>
+    <select id="findByRolename" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"></include>
+      from role
+      where rolename = #{rolename}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from role
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lanyuan.pojo.Role">
+    <delete id="doBathDelRole">
+      delete from role where id in
+      <foreach collection="array" open="(" close=")" separator="," item="id">
+        #{id}
+      </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.lanyuan.pojo.Role">
     insert into role (ID, ROLENAME)
     values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR})
   </insert>

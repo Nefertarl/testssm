@@ -23,4 +23,8 @@ public interface AdminMapper {
 
     Admin findByAcunt(String account);
 
+    Admin findById(Integer id);
+
+    void doBathDelUser(Integer[] ids);
+
 }

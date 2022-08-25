@@ -18,4 +18,8 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
 
     List<Role> show(Role a);
+
+    Role findByRolename(String rolename);
+
+    void doBathDelRole(Integer[] ids);
 }

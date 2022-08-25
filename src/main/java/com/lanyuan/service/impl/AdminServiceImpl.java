@@ -41,13 +41,18 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int delete(Integer id) {
+    public int doDelUser(Integer id) {
         return mapper.deleteByPrimaryKey(id);
     }
 
     @Override
-    public Admin selectById(Integer id) {
-        return mapper.selectByPrimaryKey(id);
+    public Admin findById(Integer id) {
+        return mapper.findById(id);
+    }
+
+    @Override
+    public void doBathDelUser(Integer[] ids) {
+        mapper.doBathDelUser(ids);
     }
 
     @Override
@@ -56,10 +61,5 @@ public class AdminServiceImpl implements AdminService {
         return mapper.updateByPrimaryKeySelective(admin);
     }
 
-    @Override
-    public Admin selectByUsernames(String username) {
-        //return mapper.selectByUsernames(username);
-        return null;
-    }
 
 }

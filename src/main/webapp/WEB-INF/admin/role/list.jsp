@@ -36,10 +36,12 @@
               <input type="text" class="form-control" value="" id="search" onblur="doSearch()" name="rolename" placeholder="请输入名称">
             </div>
           </form>
-          <div class="toolbar-btn-action">
-            <a class="btn btn-primary m-r-5" href="${base}/role/toAdd"><i class="mdi mdi-plus"></i> 新增</a>
-            <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 全部删除</a>
-          </div>
+          <form id="myForm" action="" method="post">
+            <div class="toolbar-btn-action">
+              <a class="btn btn-primary m-r-5" href="${base}/role/toAdd"><i class="mdi mdi-plus"></i> 新增</a>
+              <a class="btn btn-danger" href="#!" onclick="BathDelBtn()"><i class="mdi mdi-window-close"></i> 全部删除</a>
+            </div>
+          </form>
         </div>
         <div class="card-body">
 
@@ -63,7 +65,7 @@
                 <tr>
                   <td>
                     <label class="lyear-checkbox checkbox-primary">
-                      <input type="checkbox" name="ids[]" value="1"><span></span>
+                      <input type="checkbox" name="ids[]" value="${a.id}"><span></span>
                     </label>
                   </td>
                   <td>${a.id}</td>
@@ -71,7 +73,7 @@
                   <td>
                     <div class="btn-group">
                       <a class="btn btn-xs btn-default" href="${base}/admin/toUpdate?id=${a.id}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                      <a class="btn btn-xs btn-default" href="${base}/admin/delete?id=${a.id}" onclick="return confirm('是否删除')" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                      <a class="btn btn-xs btn-default" href="${base}/role/doDelRole?id=${a.id}" onclick="return confirm('是否删除')" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                     </div>
                   </td>
                 </tr>
@@ -110,6 +112,44 @@
     var mySearchForm = document.getElementById("mySearchForm");
     mySearchForm.submit();
   }
+
+
+  //批量删除按钮
+  function BathDelBtn(){
+    var myForm = document.getElementById("myForm");
+    //获取选中的id值
+    var value = cliBtn();
+    myForm.action="${base}/role/doBathDelRole?ids="+value;
+    if (chenNum()) {
+      myForm.submit();
+    }
+  }
+
+  //获取选中的id值
+  function cliBtn(){
+    var cks = document.getElementsByName("ids[]");
+    var str="";
+    for(var i=0;i<cks.length;i++){
+      if (cks[i].checked) {
+        str+=cks[i].value+",";
+      }
+    }
+    str = str.substring(0,str.length-1);
+    var result = str.split(",");
+    return result;
+  }
+
+  //查看复选框是否被选中
+  function chenNum(){
+    var cks = document.getElementsByName("ids[]");
+    for(var i=0;i<cks.length;i++){
+      if (cks[i].checked) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 
   $(function(){
     $('.search-bar .dropdown-menu a').click(function() {

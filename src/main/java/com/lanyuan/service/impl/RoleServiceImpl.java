@@ -23,4 +23,24 @@ public class RoleServiceImpl implements RoleService {
         return new PageInfo<>(list);
     }
 
+    @Override
+    public Role findByRolename(String rolename) {
+        return mapper.findByRolename(rolename);
+    }
+
+    @Override
+    public int addRole(Role a) {
+        return mapper.insertSelective(a);
+    }
+
+    @Override
+    public int doDelRole(Integer id) {
+        return mapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void doBathDelRole(Integer[] ids) {
+        mapper.doBathDelRole(ids);
+    }
+
 }

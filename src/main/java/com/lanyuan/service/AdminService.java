@@ -13,15 +13,14 @@ public interface AdminService {
 
     int addUser(Admin a);
 
-    int delete(Integer id);
+    int doDelUser(Integer id);
 
-    Admin selectById(Integer id);
+    Admin findById(Integer id);
+
+    void doBathDelUser(Integer[] ids);
 
     int update(Admin admin);
 
-
-    //下面这两个方法是利用shiro而增加的两个方法
-    Admin selectByUsernames(String username);
 
 
 }
