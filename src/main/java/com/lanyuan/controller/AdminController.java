@@ -102,13 +102,14 @@ public class AdminController {
     //注册操作
     @RequestMapping("/doAdd")
     public String doAdd(Admin u, MultipartFile myHead, HttpServletRequest req){
+        System.out.println("这是要输出的内容: "+myHead);
+        System.out.println("这是要输出的内容: "+myHead.getOriginalFilename());
         u.setCreatetime(new Date());
         if (myHead.getOriginalFilename().length()>0){
             u.setHeadPic(UploadAndLoadUtil.upload(req,myHead));
         }
         as.addUser(u);
         return "redirect:/admin/show";
-
     }
 
     //删除用户功能

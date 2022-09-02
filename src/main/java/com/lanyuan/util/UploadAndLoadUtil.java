@@ -1,10 +1,5 @@
 package com.lanyuan.util;
 
-import org.apache.commons.io.FileUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +37,7 @@ public class UploadAndLoadUtil {
         return newName;
     }
 
-    //文件下载
+    /*//文件下载
     public static ResponseEntity<byte[]> download(HttpServletRequest req, String fileName){
         //获取头部信息类
         HttpHeaders headers = new HttpHeaders();
@@ -59,5 +54,5 @@ public class UploadAndLoadUtil {
         }
         ResponseEntity<byte[]> re = new ResponseEntity<byte[]>(bs,headers, HttpStatus.CREATED);
         return re;
-    }
+    }*/
 }
